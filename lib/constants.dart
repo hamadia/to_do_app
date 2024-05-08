@@ -11,6 +11,7 @@ const String routeLoginScreen = 'LoginScreen';
 
 const kTransitionDuration = Duration(seconds: 3);
 int selectedIndex = 0;
+
 final List<Widget> tabs = [
   const TasksListTab(),
   const SettingsListTab(),

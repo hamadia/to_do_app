@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Features/account/presentation/views/register_view.dart';
 import 'package:to_do_app/Features/home/presentation/views/home_view.dart';
 import 'package:to_do_app/Features/splash/presentation/views/splash_view.dart';
 import 'package:to_do_app/core/utils/my_theme_data.dart';
@@ -20,8 +21,9 @@ class ToDoApp extends StatelessWidget {
       routes: {
         HomeView.routeName: (context) => const HomeView(),
         SplashView.routeName: (context) => const SplashView(),
+        RegisterView.routeName: (context) => RegisterView(),
       },
-      initialRoute: SplashView.routeName,
+      initialRoute: RegisterView.routeName,
     );
   }
 }
