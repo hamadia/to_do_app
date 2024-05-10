@@ -4,6 +4,7 @@ import 'package:to_do_app/Features/account/presentation/views/widgets/email_text
 import 'package:to_do_app/Features/account/presentation/views/widgets/name_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/password_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/user_name_text_field.dart';
+import 'package:to_do_app/core/utils/firebase_error.dart';
 
 class RegisterViewBody extends StatelessWidget {
   RegisterViewBody({super.key});
@@ -50,10 +51,21 @@ class RegisterViewBody extends StatelessWidget {
     if (formKey.currentState?.validate() == false) {
       return;
     }
-    var credential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
-    print(credential.user?.uid);
+    try {
+      var credential =
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.code == FirebaseErrorCode.weakPassword) {
+        print('The password provided is too weak');
+      } else if (e.code == FirebaseErrorCode.emailAlreadyInUse) {
+        print('the account is already exist');
+        {}
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 }
