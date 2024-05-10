@@ -36,7 +36,7 @@ class ToDoApp extends StatelessWidget {
         RegisterView.routeName: (context) => const RegisterView(),
         LoginView.routeName: (context) => const LoginView(),
       },
-      initialRoute: LoginView.routeName,
+      initialRoute: RegisterView.routeName,
     );
   }
 }

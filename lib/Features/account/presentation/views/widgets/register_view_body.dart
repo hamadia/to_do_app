@@ -1,12 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Features/account/data/model/user.dart' as myuser;
+import 'package:to_do_app/Features/account/data/user_dao.dart';
 import 'package:to_do_app/Features/account/presentation/views/login_view.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/email_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/name_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/password_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/user_name_text_field.dart';
-import 'package:to_do_app/Features/home/data/model/user.dart' as MyUser;
-import 'package:to_do_app/Features/home/data/user_dao.dart';
 import 'package:to_do_app/core/utils/Functions/dialog_utils.dart';
 import 'package:to_do_app/core/utils/firebase_error.dart';
 
@@ -77,7 +77,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
         email: email,
         password: password,
       );
-      await UserDao.addUser(MyUser.User(
+      await UserDao.addUser(myuser.User(
         id: credential.user?.uid,
         fullName: fullName,
         userName: userName,
@@ -102,8 +102,7 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
             posActionTitle: 'ok');
       }
     } catch (e) {
-      DialogUtils.showMessage(context, 'Something went wrong',
-          posActionTitle: 'ok');
+      DialogUtils.showMessage(context, e.toString(), posActionTitle: 'ok');
     }
   }
 }

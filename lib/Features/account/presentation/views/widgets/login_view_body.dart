@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Features/account/presentation/views/register_view.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/email_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/password_text_field.dart';
 import 'package:to_do_app/Features/home/presentation/views/home_view.dart';
 import 'package:to_do_app/core/utils/Functions/dialog_utils.dart';
 import 'package:to_do_app/core/utils/firebase_error.dart';
+
+import '../../../data/user_dao.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -44,6 +47,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               },
               child: const Text('Login'),
             ),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, RegisterView.routeName);
+              },
+              child: const Text('Create Account'),
+            ),
           ],
         ),
       ),
@@ -62,6 +71,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         password: password,
       );
       // Navigator.pushReplacementNamed(context, HomeView.routeName);
+      UserDao.getUser(userCredential.user!.uid);
       DialogUtils.hideDialog(context);
       DialogUtils.showMessage(context, 'User logged in successfully',
           isDismissible: false, posActionTitle: 'ok', posAction: () {
