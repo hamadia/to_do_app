@@ -68,14 +68,15 @@ class _LoginViewBodyState extends State<LoginViewBody> {
         Navigator.pushReplacementNamed(context, HomeView.routeName);
       });
     } on FirebaseAuthException catch (e) {
-      if (e.code == FirebaseErrorCode.userNotFound) {
-        print('No user found');
-      } else if (e.code == FirebaseErrorCode.wrongPassword) {
-        print('Wrong Password ,please try again');
-        {}
+      if (e.code == FirebaseErrorCode.userNotFound ||
+          e.code == FirebaseErrorCode.wrongPassword) {
+        DialogUtils.hideDialog(context);
+        DialogUtils.showMessage(context, 'Wrong email or password',
+            posActionTitle: 'ok');
       }
     } catch (e) {
-      print(e);
+      DialogUtils.showMessage(context, 'Something went wrong',
+          posActionTitle: 'ok');
     }
   }
 }
