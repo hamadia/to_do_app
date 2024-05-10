@@ -4,14 +4,19 @@ import '../../../../../core/utils/email_formate.dart';
 import 'custom_text_form_field.dart';
 
 class EmailTextField extends StatelessWidget {
-  EmailTextField({super.key});
+  EmailTextField({super.key, required this.onEmailEntered});
 
   final TextEditingController emailController = TextEditingController();
+  final void Function(String email) onEmailEntered;
 
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: emailController,
+      onChange: (email) {
+        onEmailEntered(email!);
+        return null;
+      },
       labelText: 'Email',
       validator: (input) {
         if (input == null || input.isEmpty) {

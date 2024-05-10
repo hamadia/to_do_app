@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 typedef Validator = String? Function(String?);
+typedef OnChange = String? Function(String?);
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
@@ -8,11 +9,12 @@ class CustomTextFormField extends StatelessWidget {
     required this.labelText,
     this.validator,
     this.controller,
+    this.onChange,
   });
 
   final String labelText;
   final Validator? validator;
-
+  final OnChange? onChange;
   final TextEditingController? controller;
 
   @override
@@ -20,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: TextFormField(
+        onChanged: onChange,
         controller: controller,
         validator: validator,
         decoration: InputDecoration(

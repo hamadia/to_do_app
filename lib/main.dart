@@ -14,7 +14,7 @@ void main() async {
 }
 
 Future<void> firebaseInitializeApp() async {
-  await Firebase.initializeApp(
+  Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 }
