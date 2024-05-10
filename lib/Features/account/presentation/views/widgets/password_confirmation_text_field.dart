@@ -13,7 +13,7 @@ class PasswordConfirmationTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomTextFormField(
       controller: passwordConfirmationController,
-      labelText: 'Password',
+      labelText: 'Password Confirmation',
       validator: (input) {
         if (input == null || input.isEmpty) {
           return 'Please Enter Password';
