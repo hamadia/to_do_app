@@ -21,7 +21,7 @@ class ToDoApp extends StatelessWidget {
       routes: {
         HomeView.routeName: (context) => const HomeView(),
         SplashView.routeName: (context) => const SplashView(),
-        RegisterView.routeName: (context) => RegisterView(),
+        RegisterView.routeName: (context) => const RegisterView(),
       },
       initialRoute: RegisterView.routeName,
     );

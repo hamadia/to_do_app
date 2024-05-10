@@ -3,6 +3,7 @@ import 'package:to_do_app/core/utils/colors.dart';
 
 class MyThemeData {
   static ThemeData lightTheme = ThemeData(
+    useMaterial3: false,
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.lightPrimaryColor,
     ),
@@ -21,6 +22,7 @@ class MyThemeData {
     ),
   );
   static ThemeData darkTheme = ThemeData(
+    useMaterial3: false,
     appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.lightPrimaryColor,
     ),

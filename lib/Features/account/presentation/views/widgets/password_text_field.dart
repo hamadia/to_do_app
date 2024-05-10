@@ -19,9 +19,6 @@ class PasswordTextField extends StatelessWidget {
         if (input.length < 6) {
           return 'Password must be at least 6 character';
         }
-        if (input != passwordController.text) {
-          return 'Not the same password';
-        }
         return null;
       },
     );
