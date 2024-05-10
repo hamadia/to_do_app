@@ -5,6 +5,8 @@ import 'package:to_do_app/Features/account/presentation/views/widgets/email_text
 import 'package:to_do_app/Features/account/presentation/views/widgets/name_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/password_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/user_name_text_field.dart';
+import 'package:to_do_app/Features/home/data/model/user.dart' as MyUser;
+import 'package:to_do_app/Features/home/data/user_dao.dart';
 import 'package:to_do_app/core/utils/Functions/dialog_utils.dart';
 import 'package:to_do_app/core/utils/firebase_error.dart';
 
@@ -19,6 +21,8 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
   final formKey = GlobalKey<FormState>();
   late String email;
   late String password;
+  late String fullName;
+  late String userName;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +34,16 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            NameTextField(),
-            UserNameTextField(),
+            FullNameTextField(
+              onNameEntered: (enteredName) {
+                fullName = enteredName;
+              },
+            ),
+            UserNameTextField(
+              onUserNameEntered: (enteredUserName) {
+                userName = enteredUserName;
+              },
+            ),
             EmailTextField(
               onEmailEntered: (enteredEmail) {
                 email = enteredEmail;
@@ -65,6 +77,12 @@ class _RegisterViewBodyState extends State<RegisterViewBody> {
         email: email,
         password: password,
       );
+      await UserDao.addUser(MyUser.User(
+        id: credential.user?.uid,
+        fullName: fullName,
+        userName: userName,
+        email: email,
+      ));
       DialogUtils.hideDialog(context);
       DialogUtils.showMessage(
         context,
