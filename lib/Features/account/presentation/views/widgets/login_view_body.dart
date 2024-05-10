@@ -1,14 +1,18 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/email_text_field.dart';
-import 'package:to_do_app/Features/account/presentation/views/widgets/name_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/password_text_field.dart';
-import 'package:to_do_app/Features/account/presentation/views/widgets/user_name_text_field.dart';
+import 'package:to_do_app/Features/home/presentation/views/home_view.dart';
 import 'package:to_do_app/core/utils/firebase_error.dart';
 
-class RegisterViewBody extends StatelessWidget {
-  RegisterViewBody({super.key});
+class LoginViewBody extends StatefulWidget {
+  const LoginViewBody({super.key});
 
+  @override
+  State<LoginViewBody> createState() => _LoginViewBodyState();
+}
+
+class _LoginViewBodyState extends State<LoginViewBody> {
   final formKey = GlobalKey<FormState>();
   late String email;
   late String password;
@@ -23,8 +27,6 @@ class RegisterViewBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            NameTextField(),
-            UserNameTextField(),
             EmailTextField(
               onEmailEntered: (enteredEmail) {
                 email = enteredEmail;
@@ -37,9 +39,9 @@ class RegisterViewBody extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                createAccount();
+                login();
               },
-              child: const Text('Create Account'),
+              child: const Text('Login'),
             ),
           ],
         ),
@@ -47,21 +49,21 @@ class RegisterViewBody extends StatelessWidget {
     );
   }
 
-  void createAccount() async {
+  void login() async {
     if (formKey.currentState?.validate() == false) {
       return;
     }
     try {
-      var credential =
-          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      var userCredential = FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      Navigator.pushReplacementNamed(context, HomeView.routeName);
     } on FirebaseAuthException catch (e) {
-      if (e.code == FirebaseErrorCode.weakPassword) {
-        print('The password provided is too weak');
-      } else if (e.code == FirebaseErrorCode.emailAlreadyInUse) {
-        print('the account is already exist');
+      if (e.code == FirebaseErrorCode.userNotFound) {
+        print('No user found');
+      } else if (e.code == FirebaseErrorCode.wrongPassword) {
+        print('Wrong Password ,please try again');
         {}
       }
     } catch (e) {

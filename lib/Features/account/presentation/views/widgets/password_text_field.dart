@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/Features/account/presentation/views/widgets/password_confirmation_text_field.dart';
 
 import 'custom_text_form_field.dart';
 
-class PasswordAndPasswordConfirmationTextField extends StatelessWidget {
-  PasswordAndPasswordConfirmationTextField(
-      {super.key, required this.onPasswordEntered});
+class PasswordTextField extends StatelessWidget {
+  PasswordTextField({super.key, required this.onPasswordEntered});
 
   final TextEditingController passwordController = TextEditingController();
   final void Function(String password) onPasswordEntered;
@@ -31,7 +29,7 @@ class PasswordAndPasswordConfirmationTextField extends StatelessWidget {
             return null;
           },
         ),
-        PasswordConfirmationTextField(passwordController: passwordController),
+        // PasswordConfirmationTextField(passwordController: passwordController),
       ],
     );
   }
