@@ -12,6 +12,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChange,
     this.obscureText = false,
     this.suffixIcon,
+    this.maxLines = 1,
   });
 
   final String labelText;
@@ -19,7 +20,7 @@ class CustomTextFormField extends StatelessWidget {
   final OnChange? onChange;
   final TextEditingController? controller;
   final bool obscureText;
-
+  final int maxLines;
   final Widget? suffixIcon;
 
   @override
@@ -27,6 +28,8 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: TextFormField(
+        maxLines: maxLines,
+        minLines: maxLines,
         onChanged: onChange,
         obscureText: obscureText,
         controller: controller,
