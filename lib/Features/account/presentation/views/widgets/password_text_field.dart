@@ -2,11 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'custom_text_form_field.dart';
 
-class PasswordTextField extends StatelessWidget {
-  PasswordTextField({super.key, required this.onPasswordEntered});
+class PasswordTextField extends StatefulWidget {
+  const PasswordTextField({super.key, required this.onPasswordEntered});
 
-  final TextEditingController passwordController = TextEditingController();
   final void Function(String password) onPasswordEntered;
+
+  @override
+  State<PasswordTextField> createState() => _PasswordTextFieldState();
+}
+
+class _PasswordTextFieldState extends State<PasswordTextField> {
+  final TextEditingController passwordController = TextEditingController();
+
+  var obscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +23,17 @@ class PasswordTextField extends StatelessWidget {
         CustomTextFormField(
           controller: passwordController,
           labelText: 'Password',
+          obscureText: obscureText,
+          suffixIcon: IconButton(
+            onPressed: () {
+              setState(() {
+                obscureText = !obscureText;
+              });
+            },
+            icon: Icon(obscureText ? Icons.visibility : Icons.visibility_off),
+          ),
           onChange: (password) {
-            onPasswordEntered(password!);
+            widget.onPasswordEntered(password!);
             return null;
           },
           validator: (input) {

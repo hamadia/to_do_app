@@ -19,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   final OnChange? onChange;
   final TextEditingController? controller;
   final bool obscureText;
+
   final Widget? suffixIcon;
 
   @override
@@ -26,16 +27,16 @@ class CustomTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: TextFormField(
-        obscureText: obscureText,
         onChanged: onChange,
+        obscureText: obscureText,
         controller: controller,
         validator: validator,
         decoration: InputDecoration(
-          suffixIcon: suffixIcon,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(22),
           ),
           labelText: labelText,
+          suffixIcon: suffixIcon,
         ),
       ),
     );
