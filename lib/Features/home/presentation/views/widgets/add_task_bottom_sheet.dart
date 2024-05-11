@@ -15,6 +15,8 @@ class AddTaskBottomSheet extends StatefulWidget {
 
 class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
   final formKey = GlobalKey<FormState>();
+  late String taskTitle;
+  late String taskDescription;
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +34,16 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             const SizedBox(
               height: 8,
             ),
-            const TaskTitleTextField(),
-            const TaskDescriptionTextField(),
+            TaskTitleTextField(
+              onTitleEntered: (title) {
+                taskTitle = title;
+              },
+            ),
+            TaskDescriptionTextField(
+              onDescriptionEntered: (description) {
+                taskDescription = description;
+              },
+            ),
             SelectTime(
               onTap: () {
                 showTaskDatePicker();
