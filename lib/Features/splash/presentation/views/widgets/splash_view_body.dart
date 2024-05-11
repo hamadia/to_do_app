@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Features/account/presentation/views/login_view.dart';
 import 'package:to_do_app/constants.dart';
 
 import '../../../../../core/utils/assets.dart';
-import '../../../../home/presentation/views/home_view.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -30,7 +30,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
 
   void splashViewTimer() {
     Timer(kTransitionDuration, () {
-      Navigator.pushReplacementNamed(context, HomeView.routeName);
+      Navigator.pushReplacementNamed(context, LoginView.routeName);
     });
   }
 }

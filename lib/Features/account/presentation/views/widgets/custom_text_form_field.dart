@@ -10,22 +10,28 @@ class CustomTextFormField extends StatelessWidget {
     this.validator,
     this.controller,
     this.onChange,
+    this.obscureText = false,
+    this.suffixIcon,
   });
 
   final String labelText;
   final Validator? validator;
   final OnChange? onChange;
   final TextEditingController? controller;
+  final bool obscureText;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: TextFormField(
+        obscureText: obscureText,
         onChanged: onChange,
         controller: controller,
         validator: validator,
         decoration: InputDecoration(
+          suffixIcon: suffixIcon,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(22),
           ),
