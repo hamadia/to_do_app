@@ -24,7 +24,6 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      color: splashColor,
       child: Image.asset(AssetsData.logo),
     );
   }

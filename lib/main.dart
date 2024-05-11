@@ -1,9 +1,23 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:to_do_app/Features/account/presentation/views/login_view.dart';
+import 'package:to_do_app/Features/account/presentation/views/register_view.dart';
 import 'package:to_do_app/Features/home/presentation/views/home_view.dart';
 import 'package:to_do_app/Features/splash/presentation/views/splash_view.dart';
+import 'package:to_do_app/core/utils/my_theme_data.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await firebaseInitializeApp();
   runApp(const ToDoApp());
+}
+
+Future<void> firebaseInitializeApp() async {
+  Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 }
 
 class ToDoApp extends StatelessWidget {
@@ -12,11 +26,17 @@ class ToDoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: MyThemeData.lightTheme,
+      darkTheme: MyThemeData.darkTheme,
+      themeMode: ThemeMode.light,
       routes: {
         HomeView.routeName: (context) => const HomeView(),
         SplashView.routeName: (context) => const SplashView(),
+        RegisterView.routeName: (context) => const RegisterView(),
+        LoginView.routeName: (context) => const LoginView(),
       },
-      initialRoute: SplashView.routeName,
+      initialRoute: RegisterView.routeName,
     );
   }
 }
