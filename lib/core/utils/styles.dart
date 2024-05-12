@@ -15,4 +15,8 @@ class Styles {
     fontSize: 14,
   );
   static TextStyle validTime = const TextStyle(fontSize: 12, color: Colors.red);
+  static TextStyle taskItem = const TextStyle(
+      fontSize: 18,
+      color: AppColors.lightPrimaryColor,
+      fontWeight: FontWeight.bold);
 }

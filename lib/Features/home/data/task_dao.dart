@@ -20,4 +20,10 @@ class TaskDao {
     task.id = docRef.id;
     return docRef.set(task);
   }
+
+  static Future<List<Task>> getAllTasks(String uid) async {
+    var tasksCollection = getTasksCollection(uid);
+    var snapShot = await tasksCollection.get();
+    return snapShot.docs.map((e) => e.data()).toList();
+  }
 }
