@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/core/utils/colors.dart';
 
 import '../../../../../core/utils/styles.dart';
 
@@ -7,10 +8,12 @@ class CustomTitleDescriptionShow extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
+    required this.isDone,
   });
 
   final String title;
   final String description;
+  final bool isDone;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,9 @@ class CustomTitleDescriptionShow extends StatelessWidget {
         children: [
           Text(
             title,
-            style: Styles.taskItem,
+            style: isDone
+                ? Styles.taskItem.copyWith(color: AppColors.greenColor)
+                : Styles.taskItem,
           ),
           Text(
             description,

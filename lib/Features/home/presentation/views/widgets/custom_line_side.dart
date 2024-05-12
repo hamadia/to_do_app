@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:to_do_app/core/utils/colors.dart';
 
 class CustomLineSide extends StatelessWidget {
-  const CustomLineSide({super.key});
+  const CustomLineSide({super.key, required this.isDone});
+
+  final bool isDone;
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +12,7 @@ class CustomLineSide extends StatelessWidget {
       width: 4,
       height: 80,
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
+        color: isDone ? AppColors.greenColor : Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(22),
       ),
     );

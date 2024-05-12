@@ -39,6 +39,18 @@ class TaskDao {
         (querySnapshot) => querySnapshot.docs.map((e) => e.data()).toList());
   }
 
+  static Future<void> updateTask(String uid, Task task) async {
+    var tasksCollection = getTasksCollection(uid);
+
+    return tasksCollection.doc(task.id).update(task.toFireStore());
+  }
+
+  // static Future<void> updateTask(String uid,String taskId, bool isDone)async {
+  //   var tasksCollection = getTasksCollection(uid);
+  //
+  //   return await tasksCollection.doc(taskId).update({'isDone': isDone});
+  // }
+
   static Future<void> deleteTask(String uid, String taskId) {
     var tasksCollection = getTasksCollection(uid);
     return tasksCollection.doc(taskId).delete();

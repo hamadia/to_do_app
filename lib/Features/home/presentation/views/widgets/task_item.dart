@@ -30,15 +30,26 @@ class _TaskItemListState extends State<TaskItemList> {
       child: CustomContainerTaskDesign(
         child: Row(
           children: [
-            const CustomLineSide(),
+            CustomLineSide(
+              isDone: widget.task.isDone,
+            ),
             const SizedBox(
               width: 12,
             ),
             CustomTitleDescriptionShow(
+              isDone: widget.task.isDone,
               title: widget.task.title ?? '',
               description: widget.task.description ?? '',
             ),
-            const CustomIsDone(),
+            CustomIsDone(
+              isDone: widget.task.isDone,
+              onTap: () {
+                var authProvider =
+                    Provider.of<MyAuthProvider>(context, listen: false);
+                widget.task.isDone = !widget.task.isDone;
+                TaskDao.updateTask(authProvider.databaseUser!.id!, widget.task);
+              },
+            ),
           ],
         ),
       ),
