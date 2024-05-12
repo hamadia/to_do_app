@@ -27,9 +27,14 @@ class TaskDao {
     return snapShot.docs.map((e) => e.data()).toList();
   }
 
-  static Stream<List<Task>> listenForTasks(String uid) async* {
+  static Stream<List<Task>> listenForTasks(String uid, selectedDate) async* {
     var tasksCollection = getTasksCollection(uid);
-    var stream = tasksCollection.snapshots();
+    var stream = tasksCollection
+        .where(
+          'dateTime',
+          isEqualTo: selectedDate,
+        )
+        .snapshots();
     yield* stream.map(
         (querySnapshot) => querySnapshot.docs.map((e) => e.data()).toList());
   }
