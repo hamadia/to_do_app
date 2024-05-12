@@ -26,4 +26,11 @@ class TaskDao {
     var snapShot = await tasksCollection.get();
     return snapShot.docs.map((e) => e.data()).toList();
   }
+
+  static Stream<List<Task>> listenForTasks(String uid) async* {
+    var tasksCollection = getTasksCollection(uid);
+    var stream = tasksCollection.snapshots();
+    yield* stream.map(
+        (querySnapshot) => querySnapshot.docs.map((e) => e.data()).toList());
+  }
 }

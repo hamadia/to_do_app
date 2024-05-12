@@ -19,8 +19,8 @@ class _TasksViewBodyState extends State<TasksViewBody> {
       child: Column(
         children: [
           Expanded(
-            child: FutureBuilder(
-                future: TaskDao.getAllTasks(authProvider.databaseUser!.id!),
+            child: StreamBuilder(
+                stream: TaskDao.listenForTasks(authProvider.databaseUser!.id!),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
