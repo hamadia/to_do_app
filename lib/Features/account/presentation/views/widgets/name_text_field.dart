@@ -7,7 +7,6 @@ class FullNameTextField extends StatelessWidget {
 
   final TextEditingController fullNameController = TextEditingController();
   final void Function(String fullName) onNameEntered;
-
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(

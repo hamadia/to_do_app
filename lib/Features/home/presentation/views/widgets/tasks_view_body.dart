@@ -43,8 +43,8 @@ class _TasksViewBodyState extends State<TasksViewBody> {
                   var taskList = snapshot.data;
                   return ListView.builder(
                     itemBuilder: (context, index) =>
-                        TaskItemList(task: taskList![index]),
-                    itemCount: taskList?.length ?? 0,
+                        TaskItemList(task: taskList[index]),
+                    itemCount: taskList!.length,
                   );
                 }),
           ),

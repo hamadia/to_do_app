@@ -16,7 +16,7 @@ class RegisterView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Register Screen'),
         ),
-        body: RegisterViewBody(),
+        body: const RegisterViewBody(),
       ),
     );
   }

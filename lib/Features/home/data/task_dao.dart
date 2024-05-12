@@ -33,4 +33,9 @@ class TaskDao {
     yield* stream.map(
         (querySnapshot) => querySnapshot.docs.map((e) => e.data()).toList());
   }
+
+  static Future<void> deleteTask(String uid, String taskId) {
+    var tasksCollection = getTasksCollection(uid);
+    return tasksCollection.doc(taskId).delete();
+  }
 }

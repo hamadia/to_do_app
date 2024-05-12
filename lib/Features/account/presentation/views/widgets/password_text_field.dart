@@ -15,6 +15,11 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   final TextEditingController passwordController = TextEditingController();
 
   var obscureText = true;
+@override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
