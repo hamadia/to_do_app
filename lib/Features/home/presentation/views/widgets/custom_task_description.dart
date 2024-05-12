@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/common_widget/custom_text_form_field.dart';
 
-class TaskDescriptionTextField extends StatelessWidget {
-  TaskDescriptionTextField({super.key, required this.onDescriptionEntered});
+class TaskDescriptionTextField extends StatefulWidget {
+  const TaskDescriptionTextField(
+      {super.key, required this.onDescriptionEntered});
 
   final void Function(String description) onDescriptionEntered;
+
+  @override
+  State<TaskDescriptionTextField> createState() =>
+      _TaskDescriptionTextFieldState();
+}
+
+class _TaskDescriptionTextFieldState extends State<TaskDescriptionTextField> {
   final TextEditingController descriptionController = TextEditingController();
 
   @override
@@ -13,7 +21,7 @@ class TaskDescriptionTextField extends StatelessWidget {
     return CustomTextFormField(
       controller: descriptionController,
       onChange: (description) {
-        onDescriptionEntered(description!);
+        widget.onDescriptionEntered(description!);
         return null;
       },
       labelText: 'Task description',
@@ -25,5 +33,11 @@ class TaskDescriptionTextField extends StatelessWidget {
         return null;
       },
     );
+  }
+
+  @override
+  void dispose() {
+    descriptionController.dispose();
+    super.dispose();
   }
 }

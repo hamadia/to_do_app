@@ -1,7 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do_app/Features/account/presentation/manager/register_and_login_provider.dart';
+import 'package:to_do_app/Features/home/data/model/task.dart';
+import 'package:to_do_app/Features/home/data/task_dao.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom-add_button.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom_select_time.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom_task_description.dart';
+import 'package:to_do_app/core/utils/Functions/dialog_utils.dart';
 
 import '../../../../../core/utils/styles.dart';
 import 'custom_task_title.dart';
@@ -35,13 +41,13 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
               height: 8,
             ),
             TaskTitleTextField(
-              onTitleEntered: (title) {
-                taskTitle = title;
+              onTitleEntered: (enteredTitle) {
+                taskTitle = enteredTitle;
               },
             ),
             TaskDescriptionTextField(
-              onDescriptionEntered: (description) {
-                taskDescription = description;
+              onDescriptionEntered: (enteredDescription) {
+                taskDescription = enteredDescription;
               },
             ),
             SelectTime(
@@ -74,10 +80,20 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
     setState(() {});
   }
 
-  void addTask() {
+  void addTask() async {
+    var authProvider = Provider.of<MyAuthProvider>(context, listen: false);
     if (!isValidForm()) {
       return;
     }
+    Task task = Task(
+      title: taskTitle,
+      description: taskDescription,
+      dateTime: Timestamp.fromDate(SelectTime.finalSelectedDate!),
+    );
+    DialogUtils.showLoadingDialog(context, 'Creating Task');
+    await TaskDao.addTask(task, authProvider.databaseUser!.id!);
+    DialogUtils.hideDialog(context);
+    DialogUtils.showMessage(context, 'Task Created Successfully');
   }
 
   bool isValidForm() {

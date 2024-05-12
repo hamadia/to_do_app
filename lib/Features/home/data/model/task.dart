@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Task {
+  static const collectionName = 'Tasks';
   String? id;
   String? title;
   String? description;
@@ -15,13 +16,13 @@ class Task {
     this.dateTime,
   });
 
-  Task.fromFireStore(Map<String, dynamic> data)
+  Task.fromFireStore(Map<String, dynamic>? data)
       : this(
-          id: data['id'],
-          title: data['title'],
-          description: data['description'],
-          isDone: data['isDone'],
-          dateTime: data['dateTime'],
+          id: data?['id'],
+          title: data?['title'],
+          description: data?['description'],
+          isDone: data?['isDone'],
+          dateTime: data?['dateTime'],
         );
 
   Map<String, dynamic> toFireStore() {

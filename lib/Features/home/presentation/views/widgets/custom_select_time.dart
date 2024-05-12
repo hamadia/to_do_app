@@ -4,15 +4,23 @@ import '../../../../../core/utils/styles.dart';
 
 typedef OnTap = void Function();
 
-class SelectTime extends StatelessWidget {
-  const SelectTime({
-    super.key,
-    required this.onTap,
-  });
+class SelectTime extends StatefulWidget {
+  const SelectTime({super.key, required this.onTap});
 
   final OnTap onTap;
   static bool showDateError = false;
   static DateTime? finalSelectedDate;
+
+  @override
+  State<SelectTime> createState() => _SelectTimeState();
+}
+
+class _SelectTimeState extends State<SelectTime> {
+  @override
+  void dispose() {
+    SelectTime.finalSelectedDate = null;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +28,16 @@ class SelectTime extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         InkWell(
-          onTap: onTap,
+          onTap: widget.onTap,
           child: Text(
-            finalSelectedDate == null
+            SelectTime.finalSelectedDate == null
                 ? 'Select Time'
-                : '${finalSelectedDate?.day}/ ${finalSelectedDate?.month}/${finalSelectedDate?.year}',
+                : '${SelectTime.finalSelectedDate?.day}/ ${SelectTime.finalSelectedDate?.month}/${SelectTime.finalSelectedDate?.year}',
             style: Styles.time,
           ),
         ),
         Visibility(
-          visible: showDateError,
+          visible: SelectTime.showDateError,
           child: Text(
             'Please select time',
             style: Styles.validTime,
