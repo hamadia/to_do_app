@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'custom_text_form_field.dart';
+import '../../../../../core/utils/common_widget/custom_text_form_field.dart';
 
 class PasswordTextField extends StatefulWidget {
   const PasswordTextField({super.key, required this.onPasswordEntered});
@@ -15,6 +15,11 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
   final TextEditingController passwordController = TextEditingController();
 
   var obscureText = true;
+@override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

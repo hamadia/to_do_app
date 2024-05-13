@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom_floating_action_button.dart';
+import 'package:to_do_app/Features/home/presentation/views/widgets/custom_navigation_bar.dart';
 import 'package:to_do_app/constants.dart';
 
 class HomeView extends StatefulWidget {
@@ -22,30 +23,13 @@ class _HomeViewState extends State<HomeView> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: const CustomFloatingActionButton(),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 8,
-        child: BottomNavigationBar(
-          currentIndex: selectedIndex,
-          onTap: (index) {
+      bottomNavigationBar: CustomBottomNavigationBar(
+        selectedIndex: selectedIndex,
+        onTabTapped: (index) {
+          setState(() {
             selectedIndex = index;
-            setState(() {});
-          },
-          iconSize: 22,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.menu,
-              ),
-              label: 'TaskList',
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.settings,
-                ),
-                label: 'Settings'),
-          ],
-        ),
+          });
+        },
       ),
       body: tabs[selectedIndex],
     );

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 
-import 'custom_text_form_field.dart';
+import '../../../../../core/utils/common_widget/custom_text_form_field.dart';
 
 class FullNameTextField extends StatelessWidget {
   FullNameTextField({super.key, required this.onNameEntered});
 
   final TextEditingController fullNameController = TextEditingController();
   final void Function(String fullName) onNameEntered;
-
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(

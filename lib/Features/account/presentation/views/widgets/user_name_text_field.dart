@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'custom_text_form_field.dart';
+import '../../../../../core/utils/common_widget/custom_text_form_field.dart';
 
 class UserNameTextField extends StatelessWidget {
   UserNameTextField({super.key, required this.onUserNameEntered});

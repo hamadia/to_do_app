@@ -1,13 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:to_do_app/Features/account/presentation/manager/register_and_login_provider.dart';
 import 'package:to_do_app/Features/account/presentation/views/register_view.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/email_text_field.dart';
 import 'package:to_do_app/Features/account/presentation/views/widgets/password_text_field.dart';
 import 'package:to_do_app/Features/home/presentation/views/home_view.dart';
 import 'package:to_do_app/core/utils/Functions/dialog_utils.dart';
 import 'package:to_do_app/core/utils/firebase_error.dart';
-
-import '../../../data/user_dao.dart';
 
 class LoginViewBody extends StatefulWidget {
   const LoginViewBody({super.key});
@@ -60,18 +60,13 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   }
 
   void login() async {
+    var authProvider = Provider.of<MyAuthProvider>(context, listen: false);
     if (formKey.currentState?.validate() == false) {
       return;
     }
     try {
       DialogUtils.showLoadingDialog(context, 'Loading...');
-      var userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      // Navigator.pushReplacementNamed(context, HomeView.routeName);
-      UserDao.getUser(userCredential.user!.uid);
+      await authProvider.login(email, password);
       DialogUtils.hideDialog(context);
       DialogUtils.showMessage(context, 'User logged in successfully',
           isDismissible: false, posActionTitle: 'ok', posAction: () {

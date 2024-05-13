@@ -1,36 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_app/constants.dart';
 
-class CustomNavigationBar extends StatefulWidget {
-  const CustomNavigationBar({super.key});
+class CustomBottomNavigationBar extends StatelessWidget {
+  final int selectedIndex;
+  final ValueChanged<int> onTabTapped;
 
-  @override
-  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
-}
+  const CustomBottomNavigationBar({
+    super.key,
+    required this.selectedIndex,
+    required this.onTabTapped,
+  });
 
-class _CustomNavigationBarState extends State<CustomNavigationBar> {
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: selectedIndex,
-      onTap: (index) {
-        selectedIndex = index;
-        setState(() {});
-      },
-      iconSize: 22,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.menu,
+    return BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+      notchMargin: 8,
+      child: BottomNavigationBar(
+        currentIndex: selectedIndex,
+        onTap: onTabTapped,
+        iconSize: 22,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.menu,
+            ),
+            label: 'TaskList',
           ),
-          label: 'TaskList',
-        ),
-        BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: Icon(
               Icons.settings,
             ),
-            label: 'Settings'),
-      ],
+            label: 'Settings',
+          ),
+        ],
+      ),
     );
   }
 }
