@@ -30,7 +30,7 @@ class _TaskItemListState extends State<TaskItemList> {
       child: CustomContainerTaskDesign(
         child: Row(
           children: [
-            CustomLineSide(
+             CustomLineSide(
               isDone: widget.task.isDone,
             ),
             const SizedBox(

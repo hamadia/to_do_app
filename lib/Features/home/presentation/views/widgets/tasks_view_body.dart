@@ -17,7 +17,7 @@ class _TasksViewBodyState extends State<TasksViewBody> {
   var selectedDate;
   @override
   Widget build(BuildContext context) {
-    var authProvider = Provider.of<MyAuthProvider>(context);
+    var authProvider = Provider.of<MyAuthProvider>(context, listen: false);
 
     return Column(
       children: [
@@ -41,13 +41,10 @@ class _TasksViewBodyState extends State<TasksViewBody> {
                   return const ErrorState();
                 }
                 var taskList = snapshot.data;
-                if (taskList == null) {
-                  return const ErrorState(); // Handle null case.
-                }
                 return ListView.builder(
                   itemBuilder: (context, index) =>
                       TaskItemList(task: taskList[index]),
-                  itemCount: taskList.length,
+                  itemCount: taskList!.length ?? 0,
                 );
               }),
         ),

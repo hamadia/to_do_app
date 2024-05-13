@@ -66,7 +66,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     }
     try {
       DialogUtils.showLoadingDialog(context, 'Loading...');
-      authProvider.login(email, password);
+      await authProvider.login(email, password);
       DialogUtils.hideDialog(context);
       DialogUtils.showMessage(context, 'User logged in successfully',
           isDismissible: false, posActionTitle: 'ok', posAction: () {

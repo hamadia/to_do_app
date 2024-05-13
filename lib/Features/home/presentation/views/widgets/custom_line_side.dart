@@ -3,9 +3,7 @@ import 'package:to_do_app/core/utils/colors.dart';
 
 class CustomLineSide extends StatelessWidget {
   const CustomLineSide({super.key, required this.isDone});
-
   final bool isDone;
-
   @override
   Widget build(BuildContext context) {
     return Container(

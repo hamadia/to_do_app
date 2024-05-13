@@ -4,10 +4,8 @@ import 'package:to_do_app/core/utils/styles.dart';
 
 class CustomIsDone extends StatelessWidget {
   const CustomIsDone({super.key, required this.onTap, required this.isDone});
-
   final void Function()? onTap;
   final bool isDone;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
