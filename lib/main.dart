@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:to_do_app/Features/account/presentation/manager/register_and_login_provider.dart';
 import 'package:to_do_app/Features/account/presentation/views/login_view.dart';
 import 'package:to_do_app/Features/account/presentation/views/register_view.dart';
+import 'package:to_do_app/Features/home/presentation/views/edit_task_view.dart';
 import 'package:to_do_app/Features/home/presentation/views/home_view.dart';
 import 'package:to_do_app/Features/splash/presentation/views/splash_view.dart';
 import 'package:to_do_app/core/utils/my_theme_data.dart';
@@ -40,6 +41,7 @@ class ToDoApp extends StatelessWidget {
         SplashView.routeName: (context) => const SplashView(),
         RegisterView.routeName: (context) => const RegisterView(),
         LoginView.routeName: (context) => const LoginView(),
+        EditTaskView.routeName: (context) => const EditTaskView(),
       },
       initialRoute: LoginView.routeName,
     );

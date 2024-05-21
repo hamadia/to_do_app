@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/Features/account/presentation/manager/register_and_login_provider.dart';
 import 'package:to_do_app/Features/home/data/task_dao.dart';
+import 'package:to_do_app/Features/home/presentation/views/edit_task_view.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom_delete_design.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom_is_done.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom_line_side.dart';
@@ -24,13 +25,16 @@ class _TaskItemListState extends State<TaskItemList> {
   @override
   Widget build(BuildContext context) {
     return CustomSlidable(
-      onPressed: (context) {
+      onPressedDelete: (context) {
         deleteTask(widget.task.id!);
+      },
+      onPressedEdit: (context) {
+        Navigator.pushNamed(context, EditTaskView.routeName);
       },
       child: CustomContainerTaskDesign(
         child: Row(
           children: [
-             CustomLineSide(
+            CustomLineSide(
               isDone: widget.task.isDone,
             ),
             const SizedBox(
