@@ -26,7 +26,7 @@ class _TaskItemListState extends State<TaskItemList> {
   Widget build(BuildContext context) {
     return CustomSlidable(
       onPressedDelete: (context) {
-        deleteTask(widget.task.id!);
+        deleteTask();
       },
       onPressedEdit: (context) {
         Navigator.pushNamed(context, EditTaskView.routeName,
@@ -61,10 +61,12 @@ class _TaskItemListState extends State<TaskItemList> {
     );
   }
 
-  void deleteTask(String taskId) async {
+  void deleteTask() async {
     var authProvider = Provider.of<MyAuthProvider>(context, listen: false);
-    await TaskDao.deleteTask(authProvider.databaseUser!.id!, taskId);
-    DialogUtils.showMessage(context, 'Task deleted successfully',
-        posActionTitle: 'ok');
+    await TaskDao.deleteTask(authProvider.databaseUser!.id!, widget.task.id!);
+    if (mounted) {
+      DialogUtils.showMessage(context, 'Task deleted successfully',
+          posActionTitle: 'ok');
+    }
   }
 }
