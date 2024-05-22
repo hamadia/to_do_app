@@ -13,7 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.suffixIcon,
     this.maxLines = 1,
-  });
+      this.initialValue});
 
   final String labelText;
   final Validator? validator;
@@ -22,12 +22,14 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
   final int maxLines;
   final Widget? suffixIcon;
+  final String? initialValue;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8),
       child: TextFormField(
+        initialValue: initialValue,
         maxLines: maxLines,
         minLines: maxLines,
         onChanged: onChange,

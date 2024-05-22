@@ -29,7 +29,8 @@ class _TaskItemListState extends State<TaskItemList> {
         deleteTask(widget.task.id!);
       },
       onPressedEdit: (context) {
-        Navigator.pushNamed(context, EditTaskView.routeName);
+        Navigator.pushNamed(context, EditTaskView.routeName,
+            arguments: widget.task);
       },
       child: CustomContainerTaskDesign(
         child: Row(

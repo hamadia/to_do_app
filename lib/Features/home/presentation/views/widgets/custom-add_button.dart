@@ -4,22 +4,23 @@ import '../../../../../core/utils/styles.dart';
 
 typedef OnPressed = void Function();
 
-class CustomAddButton extends StatefulWidget {
-  const CustomAddButton({super.key, required this.onPressed});
+class CustomButton extends StatefulWidget {
+  const CustomButton({super.key, required this.onPressed, required this.title});
 
   final OnPressed onPressed;
+  final String title;
 
   @override
-  State<CustomAddButton> createState() => _CustomAddButtonState();
+  State<CustomButton> createState() => _CustomButtonState();
 }
 
-class _CustomAddButtonState extends State<CustomAddButton> {
+class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: widget.onPressed,
       child: Text(
-        'Add Task',
+        widget.title,
         style: Styles.add,
       ),
     );

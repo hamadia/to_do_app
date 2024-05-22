@@ -11,6 +11,7 @@ class EditTaskView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Edit the task'),
+        toolbarHeight: 150,
       ),
       body: const EditTaskViewBody(),
     );

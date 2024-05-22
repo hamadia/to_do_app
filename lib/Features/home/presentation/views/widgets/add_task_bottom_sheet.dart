@@ -58,10 +58,11 @@ class _AddTaskBottomSheetState extends State<AddTaskBottomSheet> {
             const SizedBox(
               height: 8,
             ),
-            CustomAddButton(
+            CustomButton(
               onPressed: () {
                 addTask();
               },
+              title: 'Add Task',
             ),
           ],
         ),
