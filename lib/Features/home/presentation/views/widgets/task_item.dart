@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/Features/account/presentation/manager/register_and_login_provider.dart';
 import 'package:to_do_app/Features/home/data/task_dao.dart';
+import 'package:to_do_app/Features/home/presentation/views/edit_task_view.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom_delete_design.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom_is_done.dart';
 import 'package:to_do_app/Features/home/presentation/views/widgets/custom_line_side.dart';
@@ -24,13 +25,17 @@ class _TaskItemListState extends State<TaskItemList> {
   @override
   Widget build(BuildContext context) {
     return CustomSlidable(
-      onPressed: (context) {
-        deleteTask(widget.task.id!);
+      onPressedDelete: (context) {
+        deleteTask();
+      },
+      onPressedEdit: (context) {
+        Navigator.pushNamed(context, EditTaskView.routeName,
+            arguments: widget.task);
       },
       child: CustomContainerTaskDesign(
         child: Row(
           children: [
-             CustomLineSide(
+            CustomLineSide(
               isDone: widget.task.isDone,
             ),
             const SizedBox(
@@ -56,10 +61,12 @@ class _TaskItemListState extends State<TaskItemList> {
     );
   }
 
-  void deleteTask(String taskId) async {
+  void deleteTask() async {
     var authProvider = Provider.of<MyAuthProvider>(context, listen: false);
-    await TaskDao.deleteTask(authProvider.databaseUser!.id!, taskId);
-    DialogUtils.showMessage(context, 'Task deleted successfully',
-        posActionTitle: 'ok');
+    await TaskDao.deleteTask(authProvider.databaseUser!.id!, widget.task.id!);
+    if (mounted) {
+      DialogUtils.showMessage(context, 'Task deleted successfully',
+          posActionTitle: 'ok');
+    }
   }
 }

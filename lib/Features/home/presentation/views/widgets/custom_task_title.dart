@@ -25,7 +25,7 @@ class _TaskTitleTextFieldState extends State<TaskTitleTextField> {
       labelText: 'Task title',
       validator: (input) {
         if (input == null || input.isEmpty) {
-          return 'Please enter description';
+          return 'Please enter task';
         }
         return null;
       },
